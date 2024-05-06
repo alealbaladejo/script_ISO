@@ -32,6 +32,10 @@ imprimir_encabezado() {
     echo -e "\n${azul}$encabezado${reset}"
 }
 
+memoria_ram() {
+	free -h
+}
+
 # Verificar la existencia de comandos necesarios
 	echo -e "${amarillo}Verificando la existencia de los comandos necesarios...${reset}"
 	sleep 2
@@ -40,6 +44,20 @@ imprimir_encabezado() {
 	sleep 2
 # Imprimir información de la CPU
 	imprimir_encabezado "Información de la CPU"
-	echo -e "${amarillo}Obteniendo información de la CPU...${blanco}"
+	echo -e "${amarillo}Obteniendo información de la CPU...${reset}"
 	lscpu
+	sleep 2
+	clear
+#MEMORIA RAM
+	echo -e "${morado}\n Comprobando si existen los comandos"
+	verificar_comando free -h
 
+
+# Verifica si hay espacio de intercambio
+if [[ -n "$(cat /proc/swaps | grep -v '^Filename')" ]]; then
+    echo "¡Espacio de intercambio (swap) está configurado en el sistema!"
+        memoria_ram "INFORMACIÓN CON SWAP"
+else
+    echo "No se encontró espacio de intercambio (swap) configurado en el sistema."
+
+fi
