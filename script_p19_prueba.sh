@@ -25,9 +25,18 @@ imprimir_encabezado() {
 
 # Función para mostrar información de la memoria RAM
 mostrar_memoria_ram() {
-    imprimir_encabezado "Información de la Memoria RAM"
-    echo -e "${amarillo}Obteniendo información de la Memoria RAM...${reset}"
-    free -h
+	if [[ -n "$(cat /proc/swaps | grep -v '^Filename')" ]]; then
+    		echo "¡Espacio de intercambio (swap) está configurado en el sistema!"
+		echo "Mostrando toda la información con respecto a la Memoria Ram y a la SWAP..."
+		sleep 1
+        	memoria_ram "INFORMACIÓN CON SWAP"
+		free -h
+	else
+    		echo "No se encontró espacio de intercambio (swap) configurado en el sistema."
+		echo "Mostrando la información con respecto a la Memoria RAM..."
+		sleep 1
+		free -h | head -n 2
+	fi
 }
 
 # Función para mostrar información de la CPU
@@ -55,7 +64,7 @@ mostrar_informacion_interfaces_red() {
 mostrar_informacion_tarjetas_graficas() {
     imprimir_encabezado "Información de las Tarjetas Gráficas"
     echo -e "${amarillo}Obteniendo información de las Tarjetas Gráficas...${reset}"
-    lspci | grep -i vga
+    lshw -C display
 }
 
 # Verificar la existencia de los comandos necesarios
