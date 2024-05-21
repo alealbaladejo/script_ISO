@@ -246,9 +246,3 @@ echo "${verde}Todos los comandos necesarios están disponibles.${reset}"
 mostrar_menu
 
 echo "${verde}Fin del script.${reset}"
-
-
-
-
-
-
