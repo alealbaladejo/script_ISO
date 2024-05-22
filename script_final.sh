@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Autor: Alejandro Albaladejo y Raúl Herrera
 # Descripción: Script de menú para elegir entre el script de bash o sh.
 
@@ -44,5 +44,3 @@ mostrar_menu() {
 
 # Mostrar el menú
 mostrar_menu
-
-echo "Fin del menú."

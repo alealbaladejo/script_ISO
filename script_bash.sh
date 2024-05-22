@@ -108,7 +108,7 @@ verificar_comando() {
     if apt-file search "$comando" &> /dev/null; then
         if ! command -v "$comando" &> /dev/null; then
             echo -e "${rojo}Error:${reset} El comando '$comando' no está disponible o no se encuentra en la ruta de búsqueda."
-            read -p "El comando '$comando' no está instalado, ¿Deseas instalarlo? (si/no): " confirmacion
+            read -p -n 1 "El comando '$comando' no está instalado, ¿Deseas instalarlo? (si/no): " confirmacion
             if [[ $confirmacion == "si" ]]; then
                 if buscar_paquete_por_comando "$comando"; then
                     read -p "Introduce el nombre del paquete que quieres instalar: " paquete
